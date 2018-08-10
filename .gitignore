@@ -31,3 +31,12 @@ tests/_support/_generated
 
 #vagrant folder
 /.vagrant
+
+# jetbrains #
+*.iml
+.idea
+
+### macOS ###
+*.DS_Store
+.AppleDouble
+.LSOverride
