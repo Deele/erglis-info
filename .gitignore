@@ -1,4 +1,5 @@
-# phpstorm project files
+# jetbrains project files
+*.iml
 .idea
 
 # netbeans project files
@@ -31,3 +32,8 @@ tests/_support/_generated
 
 #vagrant folder
 /.vagrant
+
+### macOS ###
+*.DS_Store
+.AppleDouble
+.LSOverride
