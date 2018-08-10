@@ -7,6 +7,4 @@
  * @var \yii\web\View $this
  */
 
-?><header class="header">
-    
-</header>
+?><?= \app\widgets\site_header\SiteHeader::widget() ?>
