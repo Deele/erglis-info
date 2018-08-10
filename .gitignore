@@ -1,4 +1,5 @@
-# phpstorm project files
+# jetbrains project files
+*.iml
 .idea
 
 # netbeans project files
@@ -31,10 +32,6 @@ tests/_support/_generated
 
 #vagrant folder
 /.vagrant
-
-# jetbrains #
-*.iml
-.idea
 
 ### macOS ###
 *.DS_Store
