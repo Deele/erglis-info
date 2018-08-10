@@ -1,18 +1,15 @@
 <?php
 /**
- * Main layout
+ * Blank layout
  */
 
-use app\widgets\Alert;
 use yii\helpers\Html;
 use app\assets\AppAsset;
 
 /**
  * @var \yii\web\View $this
  * @var string $content
- * @var \app\base\web\Controller $context
  */
-$context = $this->context;
 
 $lang = Yii::$app->language;
 $charset = Yii::$app->charset;
@@ -27,22 +24,14 @@ $this->beginPage();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode(strip_tags($context->title)) ?></title>
+    <title><?= Html::encode(strip_tags($this->title)) ?></title>
     <?= $this->render('_icons') ?>
     <?php $this->head() ?>
 </head>
-<body class="page page_main-layout">
+<body class="page page_blank-layout">
 <?php $this->beginBody() ?>
-<div class="wrap">
-    <?= $this->render('_header') ?>
-    <div class="container">
-        <?= \app\widgets\Heading::widget($context->headingWidgetOptions) ?>
-        <?= Alert::widget() ?>
-        <main class="page__content"><?= $content ?></main>
-    </div>
-</div>
-<?= $this->render('_footer') ?>
+<main class="page__content"><?= $content ?></main>
 <?php $this->endBody() ?>
 </body>
-</html>
-<?php $this->endPage() ?>
+</html><?php
+$this->endPage();

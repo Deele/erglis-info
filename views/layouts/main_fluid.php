@@ -1,6 +1,6 @@
 <?php
 /**
- * Main layout
+ * Main (fluid) layout
  */
 
 use app\widgets\Alert;
@@ -31,17 +31,16 @@ $this->beginPage();
     <?= $this->render('_icons') ?>
     <?php $this->head() ?>
 </head>
-<body class="page page_main-layout">
+<body class="page page_main-fluid-layout">
 <?php $this->beginBody() ?>
 <div class="wrap">
     <?= $this->render('_header') ?>
-    <div class="container">
+    <div class="container-fluid">
         <?= \app\widgets\Heading::widget($context->headingWidgetOptions) ?>
         <?= Alert::widget() ?>
         <main class="page__content"><?= $content ?></main>
     </div>
 </div>
-<?= $this->render('_footer') ?>
 <?php $this->endBody() ?>
 </body>
 </html>

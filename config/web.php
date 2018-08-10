@@ -1,74 +1,60 @@
 <?php
 
-$params = require __DIR__ . '/params.php';
-$db = require __DIR__ . '/db.php';
-
 $config = [
-    'id' => 'basic',
-    'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
-    'aliases' => [
-        '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
-    ],
+    'id'         => 'web',
     'components' => [
-        'request' => [
+        'request'       => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '',
         ],
-        'cache' => [
-            'class' => 'yii\caching\FileCache',
-        ],
-        'user' => [
-            'identityClass' => 'app\models\User',
+        'user'          => [
+            'class'           => 'app\base\web\WebUser',
+            'identityClass'   => 'app\base\web\WebUserIdentity',
             'enableAutoLogin' => true,
+            'loginUrl'        => ['user/login']
         ],
-        'errorHandler' => [
-            'errorAction' => 'site/error',
+        'session'       => [
+            'class' => 'app\base\web\DbSession',
         ],
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
+        'errorHandler'  => [
+            'errorAction' => 'system/errors/error',
         ],
-        'log' => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
-                [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+        'log'           => [
+            'flushInterval' => 1,
+            'traceLevel'    => (YII_DEBUG ? 7 : 0),
+            'targets'       => [
+                'logfile' => [
+                    'class'          => 'yii\log\FileTarget',
+                    'exportInterval' => 1,
+                    'levels'         => ['error', 'warning'],
+                    'except'         => [
+                        'application.caching',
+                    ],
                 ],
             ],
         ],
-        'db' => $db,
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
-        ],
-        */
     ],
-    'params' => $params,
+    'modules'    => [
+        'gridview' => [
+            'class' => '\kartik\grid\Module'
+            // 'downloadAction' => 'gridview/export/download',
+            // 'i18n' => []
+        ]
+    ]
 ];
 
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
-        'class' => 'yii\debug\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'class'      => 'yii\debug\Module',
+        'allowedIPs' => ['127.0.0.1', '::1'],
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
-        'class' => 'yii\gii\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'class'      => 'yii\gii\Module',
+        'allowedIPs' => ['127.0.0.1', '::1'],
     ];
 }
 

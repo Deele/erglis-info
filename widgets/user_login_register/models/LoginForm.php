@@ -1,24 +1,23 @@
 <?php
+namespace app\widgets\user_login_register\models;
 
-namespace app\models;
-
+use app\base\web\WebUserIdentity;
 use Yii;
 use yii\base\Model;
 
 /**
  * LoginForm is the model behind the login form.
  *
- * @property User|null $user This property is read-only.
- *
+ * @property-read WebUserIdentity|null $user This property is read-only.
  */
 class LoginForm extends Model
 {
     public $username;
     public $password;
     public $rememberMe = true;
+    public $sessionDuration = 3600*24*30;
 
     private $_user = false;
-
 
     /**
      * @return array the validation rules.
@@ -26,12 +25,21 @@ class LoginForm extends Model
     public function rules()
     {
         return [
-            // username and password are both required
             [['username', 'password'], 'required'],
-            // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
-            // password is validated by validatePassword()
-            ['password', 'validatePassword'],
+            [
+                'password',
+                'validatePassword',
+                'message' => 'Incorrect username or password.'
+            ],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'username' => 'Username (e-mail)',
+            'password' => 'Password',
         ];
     }
 
@@ -48,7 +56,7 @@ class LoginForm extends Model
             $user = $this->getUser();
 
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+                $this->addError($attribute, $params['message']);
             }
         }
     }
@@ -60,7 +68,10 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
+            return Yii::$app->user->login(
+                $this->getUser(),
+                $this->rememberMe ? $this->sessionDuration : 0
+            );
         }
         return false;
     }
@@ -68,12 +79,12 @@ class LoginForm extends Model
     /**
      * Finds user by [[username]]
      *
-     * @return User|null
+     * @return WebUserIdentity|null
      */
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = User::findByUsername($this->username);
+            $this->_user = WebUserIdentity::findByUsername($this->username);
         }
 
         return $this->_user;
