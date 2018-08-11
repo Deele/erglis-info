@@ -16,6 +16,7 @@ class AppAsset extends AssetBundle
     public $sourcePath = '@app/assets/dist';
     public $css = [
         'css/site.css',
+        'https://fonts.googleapis.com/css?family=Inder',
     ];
     public $js = [
         'https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js',
