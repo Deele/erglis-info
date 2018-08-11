@@ -13,13 +13,8 @@ body::before{
   content:"";
   position: fixed;
   z-index: -1;
-  height:100%;
-  width:100%;
-  background: url('../background.png') no-repeat center center fixed;
-  background-size: cover;
-}
-
-footer {
-  position: absolute;
-  bottom: 0;
+  height: 100%;
+  width: 100%;
+  background: black url('../background.png') no-repeat center fixed;
+  background-size: contain;
 }
