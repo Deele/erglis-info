@@ -5,7 +5,7 @@ $config = [
     'components' => [
         'request'       => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => '',
+            'cookieValidationKey' => 'my-secret-key',
         ],
         'user'          => [
             'class'           => 'app\base\web\WebUser',
@@ -13,9 +13,9 @@ $config = [
             'enableAutoLogin' => true,
             'loginUrl'        => ['user/login']
         ],
-        'session'       => [
-            'class' => 'app\base\web\DbSession',
-        ],
+//        'session'       => [
+//            'class' => 'app\base\web\DbSession',
+//        ],
         'errorHandler'  => [
             'errorAction' => 'system/errors/error',
         ],
