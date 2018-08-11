@@ -14,6 +14,7 @@ class SiteHeaderAssetBundle extends AssetBundle
     ];
     public $js = [
 //        'siteHeader.js',
+
     ];
     public $depends = [
         'app\assets\AppAsset',

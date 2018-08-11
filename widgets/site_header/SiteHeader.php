@@ -18,12 +18,14 @@ class SiteHeader extends Widget
     public function run()
     {
         Html::addCssClass($this->options, $this->name . '-widget');
-        SiteHeaderAssetBundle::register($this->view);
+        $assets = SiteHeaderAssetBundle::register($this->view);
 
         return Html::tag(
             'header',
             $this->render(
-                'siteHeader'
+                'siteHeader', [
+                    'assetBaseUrl' => $assets->baseUrl
+                ]
             ),
             $this->options
         );
