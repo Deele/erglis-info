@@ -234,4 +234,4 @@ You can see code coverage output under the `tests/_output` directory.
 
 
 ### Running the app locally
-    php yii serve --port=8888
+    php yii serve
