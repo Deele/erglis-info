@@ -23,7 +23,8 @@ class SiteHeader extends Widget
         return Html::tag(
             'header',
             $this->render(
-                'siteHeader', [
+                'siteHeader',
+                [
                     'assetBaseUrl' => $assets->baseUrl
                 ]
             ),
