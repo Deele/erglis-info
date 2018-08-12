@@ -1,15 +1,15 @@
-#yii-map{
+.events-map-widget {
   margin: 10px auto;
   width: 100%;
   height: 500px;
 }
 
-#map{
+.events-map-widget #map{
   width: 100%;
   height: 100%;
   color: black;
 }
 
-.lnk{
+.events-map-widget .lnk{
   display: block;
 }
