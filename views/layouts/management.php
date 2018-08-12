@@ -53,6 +53,10 @@ $this->beginPage();
                             'label' => 'Dashboard',
                             'url' => ['mgmt/management/index'],
                         ],
+                        [
+                            'label' => 'Events',
+                            'url' => ['mgmt/events-mgmt/index'],
+                        ],
                     ],
                 ]) ?>
             </div>
