@@ -4,7 +4,6 @@ body {
     margin: 0;
     position: relative;
   --background-color: #000040;
-  --accent-color: #AA3939;
   color: ivory;
   font-family: 'Inder', serif;
 }
@@ -16,5 +15,9 @@ body::before{
   height: 100%;
   width: 100%;
   background: black url('../background.png') no-repeat center fixed;
-  background-size: contain;
+  background-size: cover;
+}
+
+a{
+  color: #0000C0;
 }

@@ -17,13 +17,14 @@ class EventsMap extends Widget
     public function run()
     {
         Html::addCssClass($this->options, $this->name . '-widget');
-        EventsMapAssetBundle::register($this->view);
+        $assets = EventsMapAssetBundle::register($this->view);
         $clientOptions = [
             'widgetType' => [
                 'name' => $this->name
             ],
             'id' => 'yii-map',
             'isDebugModeEnabled' => YII_DEBUG,
+            'baseUrl' => $assets->baseUrl,
         ];
         $clientOptions = Json::htmlEncode($clientOptions);
         \Yii::$app->view->registerJs(

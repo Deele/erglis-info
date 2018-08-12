@@ -38,6 +38,190 @@ window.yii.eventsMapWidget = ($ => {
     constructor(id, parent, options) {
       super(id, parent, options);
 
+      this.settings.baseUrl = '';
+      this.settings.mapStyles = [
+        {
+          "featureType": "all",
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "saturation": 36
+            },
+            {
+              "color": "#000000"
+            },
+            {
+              "lightness": 40
+            }
+          ]
+        },
+        {
+          "featureType": "all",
+          "elementType": "labels.text.stroke",
+          "stylers": [
+            {
+              "visibility": "on"
+            },
+            {
+              "color": "#000000"
+            },
+            {
+              "lightness": 16
+            }
+          ]
+        },
+        {
+          "featureType": "all",
+          "elementType": "labels.icon",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "administrative",
+          "elementType": "geometry.fill",
+          "stylers": [
+            {
+              "color": "#000000"
+            },
+            {
+              "lightness": 20
+            }
+          ]
+        },
+        {
+          "featureType": "administrative",
+          "elementType": "geometry.stroke",
+          "stylers": [
+            {
+              "color": "#000000"
+            },
+            {
+              "lightness": 17
+            },
+            {
+              "weight": 1.2
+            }
+          ]
+        },
+        {
+          "featureType": "landscape",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#000000"
+            },
+            {
+              "lightness": 20
+            }
+          ]
+        },
+        {
+          "featureType": "poi",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#000000"
+            },
+            {
+              "lightness": 21
+            }
+          ]
+        },
+        {
+          "featureType": "road.highway",
+          "elementType": "geometry.fill",
+          "stylers": [
+            {
+              "color": "#000000"
+            },
+            {
+              "lightness": 17
+            }
+          ]
+        },
+        {
+          "featureType": "road.highway",
+          "elementType": "geometry.stroke",
+          "stylers": [
+            {
+              "color": "#000000"
+            },
+            {
+              "lightness": 29
+            },
+            {
+              "weight": 0.2
+            }
+          ]
+        },
+        {
+          "featureType": "road.arterial",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#000000"
+            },
+            {
+              "lightness": 18
+            }
+          ]
+        },
+        {
+          "featureType": "road.local",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#000000"
+            },
+            {
+              "lightness": 16
+            }
+          ]
+        },
+        {
+          "featureType": "transit",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#000000"
+            },
+            {
+              "lightness": 19
+            }
+          ]
+        },
+        {
+          "featureType": "water",
+          "elementType": "geometry",
+          "stylers": [
+            {
+              "color": "#000000"
+            },
+            {
+              "lightness": 17
+            }
+          ]
+        },
+        {
+          "featureType": "water",
+          "elementType": "geometry.fill",
+          "stylers": [
+            {
+              "saturation": "-100"
+            },
+            {
+              "lightness": "-100"
+            },
+            {
+              "gamma": "0.00"
+            }
+          ]
+        }
+      ];
+
       this.locations = [
         ['Majori', {lat: 56.9720962, lng: 23.7867654}, [{year: 1989, lnk: 'qwer'}]],
         ['Ergļi', {lat: 56.9026381, lng: 25.5727127}, [{year: 1990, lnk: 'qwer'}, {
@@ -56,7 +240,7 @@ window.yii.eventsMapWidget = ($ => {
         ['Vabole', {lat: 56.0308864, lng: 26.4416316}, [{year: 2000, lnk: 'qwer'}]],
         ['Ļaudona', {lat: 56.689893, lng: 26.0055484}, [{year: 2001, lnk: 'qwer'}]],
         ['Zentene', {lat: 57.168644, lng: 22.8920529}, [{year: 2002, lnk: 'qwer'}]],
-        ['Jūrkalne', {lat: 57.0075391, lng: 57.0075391}, [{year: 2003, lnk: 'qwer'}]],
+        ['Jūrkalne', {lat: 57.0075391, lng: 21.383548}, [{year: 2003, lnk: 'qwer'}]],
         ['Kocēni', {lat: 57.5284492, lng: 24.8702506}, [{year: 2004, lnk: 'qwer'}]],
         ['Korģene', {lat: 57.7690316, lng: 24.5329867}, [{year: 2005, lnk: 'qwer'}]],
         ['Augstkalne', {lat: 56.4063672, lng: 23.3291487}, [{year: 2006, lnk: 'qwer'}]],
@@ -83,11 +267,13 @@ window.yii.eventsMapWidget = ($ => {
     }
 
     run() {
-      let mapCenter = {lat: 57, lng: 24};
+      const w = this;
+      let mapCenter = {lat: 57, lng: 24.5};
 
       const map = new google.maps.Map(document.getElementById('map'), {
         center: mapCenter,
-        zoom: 7
+        zoom: 7,
+        styles: w.settings.mapStyles,
       });
 
       this.drawPoints(map);
@@ -95,6 +281,8 @@ window.yii.eventsMapWidget = ($ => {
     }
 
     drawPoints(map) {
+      let icon = this.settings.baseUrl + '/aquila.png';
+
       this.locations.forEach(location => {
         let content = `<span class='lnk'>${location[0]}</span>` +
         location[2].map(event =>
@@ -107,6 +295,7 @@ window.yii.eventsMapWidget = ($ => {
           map: map,
           position: location[1],
           title: location[0],
+          icon,
         });
         marker.addListener('click', function () {
           infoWindow.open(map, marker);
