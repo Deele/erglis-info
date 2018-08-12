@@ -21,3 +21,10 @@ body::before{
 a{
   color: #0000C0;
 }
+
+.events-index,
+.event-update,
+.event-create {
+    background-color: #fff;
+    color: #000;
+}
