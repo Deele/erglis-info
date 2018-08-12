@@ -22,6 +22,6 @@ class EventsMapAssetBundle extends AssetBundle
     public function init()
     {
         parent::init();
-        $this->js[] = 'https://maps.googleapis.com/maps/api/js?key=' . \Yii::$app->params['googleApiKey'];
+        $this->js[] = 'https://maps.googleapis.com/maps/api/js?key=' . \Yii::$app->params['googleApiKey'] . '&callback=initMap';
     }
 }
