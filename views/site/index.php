@@ -8,7 +8,5 @@
  */
 
 ?><div class="site-index">
-    <div class="">
-        Ērglis
-    </div>
+    <?= \app\widgets\events_map\EventsMap::widget() ?>
 </div>
