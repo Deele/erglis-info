@@ -9,6 +9,7 @@ $config = [
     'basePath'   => dirname(__DIR__),
     'bootstrap'  => [
         'log',
+        'events'
     ],
     'timeZone'   => 'Europe/Riga',
     'aliases'    => [
@@ -51,6 +52,12 @@ $config = [
                     'basePath'       => '@app/messages'
                 ],
             ],
+        ],
+    ],
+    'modules'    => [
+        'events' => [
+            'class' => 'app\modules\events\EventsModule',
+            'cacheConfig' => 'cache',
         ],
     ],
     'params'     => $params,

@@ -1,5 +1,7 @@
 <?php
 
+namespace app\migrations;
+
 use app\models\user\User;
 use yii\db\Expression;
 use yii\db\Migration;
