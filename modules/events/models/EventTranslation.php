@@ -2,7 +2,9 @@
 
 namespace app\modules\events\models;
 
+use app\modules\events\base\EventTranslationQuery;
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%event__translation}}".
@@ -15,7 +17,7 @@ use Yii;
  *
  * @property Event $event
  */
-class EventTranslation extends \yii\db\ActiveRecord
+class EventTranslation extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -31,7 +33,6 @@ class EventTranslation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['event_id'], 'required'],
             [['event_id'], 'integer'],
             [['description'], 'string'],
             [['language'], 'string', 'max' => 5],
@@ -60,15 +61,15 @@ class EventTranslation extends \yii\db\ActiveRecord
      */
     public function getEvent()
     {
-        return $this->hasOne(Event::className(), ['id' => 'event_id']);
+        return $this->hasOne(Event::class, ['id' => 'event_id']);
     }
 
     /**
      * {@inheritdoc}
-     * @return \app\modules\events\base\EventTranslationQuery the active query used by this AR class.
+     * @return EventTranslationQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new \app\modules\events\base\EventTranslationQuery(get_called_class());
+        return new EventTranslationQuery(get_called_class());
     }
 }

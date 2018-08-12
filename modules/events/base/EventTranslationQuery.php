@@ -2,17 +2,17 @@
 
 namespace app\modules\events\base;
 
+use deele\devkit\db\ColumnNameTrait;
+use yii\db\ActiveQuery;
+
 /**
  * This is the ActiveQuery class for [[\app\modules\events\models\EventTranslation]].
  *
  * @see \app\modules\events\models\EventTranslation
  */
-class EventTranslationQuery extends \yii\db\ActiveQuery
+class EventTranslationQuery extends ActiveQuery
 {
-    /*public function active()
-    {
-        return $this->andWhere('[[status]]=1');
-    }*/
+    use ColumnNameTrait;
 
     /**
      * {@inheritdoc}

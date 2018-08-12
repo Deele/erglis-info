@@ -113,17 +113,13 @@ class m180812_002529_create_event_type extends Migration
             // Indexing and keys
             if ($createTable) {
                 try {
-                    $this->createIndex(
-                        SchemaHelper::createIndexName([
-                            'event_type_id',
-                            'language',
-                        ]),
+                    $this->addPrimaryKey(
+                        'primaryKey',
                         $tableName,
                         [
                             'event_type_id',
                             'language',
-                        ],
-                        true
+                        ]
                     );
 
                     $this->createIndex(
@@ -195,14 +191,6 @@ class m180812_002529_create_event_type extends Migration
         try {
 
             // Indexing and keys
-            $this->dropIndex(
-                SchemaHelper::createIndexName([
-                    'event_type_id',
-                    'language',
-                ]),
-                $tableName
-            );
-
             $this->dropForeignKey(
                 SchemaHelper::createForeignKeyName($this->translationsTableName, 'event_type_id'),
                 $tableName
