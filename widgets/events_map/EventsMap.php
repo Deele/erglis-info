@@ -9,20 +9,23 @@ use yii\helpers\Json;
 class EventsMap extends Widget
 {
     public $name = 'events-map';
-    public $options = ['id' => 'yii-map'];
+
+    public $options = [];
 
     /**
      * {@inheritdoc}
      */
     public function run()
     {
-        Html::addCssClass($this->options, $this->name . '-widget');
+        $options = $this->options;
+        $options['id'] = $this->id;
+        Html::addCssClass($options, $this->name . '-widget');
         $assets = EventsMapAssetBundle::register($this->view);
         $clientOptions = [
             'widgetType' => [
                 'name' => $this->name
             ],
-            'id' => 'yii-map',
+            'id' => $this->id,
             'isDebugModeEnabled' => YII_DEBUG,
             'baseUrl' => $assets->baseUrl,
         ];
@@ -36,7 +39,7 @@ class EventsMap extends Widget
             $this->render(
                 'eventsMap'
             ),
-            $this->options
+            $options
         );
     }
 }
