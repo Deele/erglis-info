@@ -263,6 +263,7 @@ window.yii.eventsMapWidget = ($ => {
     closeInfoWindow() {
       if (this.openInfoWindow) {
         this.openInfoWindow.close();
+        this.openInfoWindow = false;
       }
     }
 
@@ -304,8 +305,8 @@ window.yii.eventsMapWidget = ($ => {
         icon,
       });
       marker.addListener('click', () => {
-        infoWindow.open(map, marker);
         this.closeInfoWindow();
+        infoWindow.open(map, marker);
         this.openInfoWindow = infoWindow;
       });
       map.addListener('click', () => this.closeInfoWindow());
