@@ -39,36 +39,37 @@ window.yii.eventsMapWidget = ($ => {
       super(id, parent, options);
 
       this.locations = [
-        ['1989. Majori', 56.9720962, 23.7867654],
-        ['1990. Ērgļi', 56.9026381, 56.9026381],
-        ['1991. Ērgļi', 56.9026381, 56.9026381],
-        ['1992. Sigulda', 57.1633299, 24.8103712],
-        ['1993. Sigulda', 57.1633299, 24.8103712],
-        ['1994. Sigulda', 57.1633299, 24.8103712],
-        ['1995. Irbene', 57.5601348, 21.8514777],
-        ['1996. Riekstukalns', 56.7733871, 24.4019641],
-        ['1997. Rucava', 56.2167009, 20.9549537],
-        ['1998. Zentene', 57.168644, 22.8920529],
-        ['1999. Burtnieki', 57.6923114, 25.2647041],
-        ['2000. Vabole', 56.0308864, 26.4416316],
-        ['2001. Ļaudona', 56.689893, 4, 26.0055484],
-        ['2002. Zentene', 57.168644, 22.8920529],
-        ['2003. Jūrkalne', 57.0075391, 57.0075391],
-        ['2004. Kocēni', 57.5284492, 24.8702506],
-        ['2005. Korģene', 57.7690316, 24.5329867],
-        ['2006. Augstkalne', 56.4063672, 23.3291487],
-        ['2007. Viļķene', 57.6051234, 24.4638718],
-        ['2008. Viļķene', 57.6051234, 24.4638718],
-        ['2009. Ergļi', 56.9026381, 56.9026381],
-        ['2010. Nereta', 56.3232403, 24.8730035],
-        ['2011. Viesīte', 56.3449555, 25.5429385],
-        ['2012. Suntaži', 56.9046595, 24.9066061],
-        ['2013. Piltene', 57.2282828, 21.690247],
-        ['2014. Valmiera', 57.5310966, 25.4131496],
-        ['2015. Mālpils', 57.0069641, 24.9153363],
-        ['2016. Mazsalaca', 57.8629072, 25.0305959],
-        ['2017. Mērsrags', 57.3446637, 23.1087438],
-        ['2018. Ķoņi', 57.9547515, 25.3406828],
+        ['Majori', {lat: 56.9720962, lng: 23.7867654}, [{year: 1989, lnk: 'qwer'}]],
+        ['Ergļi', {lat: 56.9026381, lng: 25.5727127}, [{year: 1990, lnk: 'qwer'}, {
+          year: 1991,
+          lnk: 'qwer'
+        }, {year: 2009, lnk: 'qwer'}]],
+        ['Sigulda', {lat: 57.1633299, lng: 24.8103712}, [{year: 1992, lnk: 'qwer'}, {
+          year: 1993,
+          lnk: 'qwer'
+        }, {year: 1994, lnk: 'qwer'}]],
+        ['Irbene', {lat: 57.5601348, lng: 21.8514777}, [{year: 1995, lnk: 'qwer'}]],
+        ['Riekstukalns', {lat: 56.7733871, lng: 24.4019641}, [{year: 1996, lnk: 'qwer'}]],
+        ['Rucava', {lat: 56.2167009, lng: 20.9549537}, [{year: 1997, lnk: 'qwer'}]],
+        ['Zentene', {lat: 57.168644, lng: 22.8920529}, [{year: 1998, lnk: 'qwer'}]],
+        ['Burtnieki', {lat: 57.6923114, lng: 25.2647041}, [{year: 1999, lnk: 'qwer'}]],
+        ['Vabole', {lat: 56.0308864, lng: 26.4416316}, [{year: 2000, lnk: 'qwer'}]],
+        ['Ļaudona', {lat: 56.689893, lng: 26.0055484}, [{year: 2001, lnk: 'qwer'}]],
+        ['Zentene', {lat: 57.168644, lng: 22.8920529}, [{year: 2002, lnk: 'qwer'}]],
+        ['Jūrkalne', {lat: 57.0075391, lng: 57.0075391}, [{year: 2003, lnk: 'qwer'}]],
+        ['Kocēni', {lat: 57.5284492, lng: 24.8702506}, [{year: 2004, lnk: 'qwer'}]],
+        ['Korģene', {lat: 57.7690316, lng: 24.5329867}, [{year: 2005, lnk: 'qwer'}]],
+        ['Augstkalne', {lat: 56.4063672, lng: 23.3291487}, [{year: 2006, lnk: 'qwer'}]],
+        ['Viļķene', {lat: 57.6051234, lng: 24.4638718}, [{year: 2007, lnk: 'qwer'}, {year: 2008, lnk: 'qwer'}]],
+        ['Nereta', {lat: 56.3232403, lng: 25.311714}, [{year: 2010, lnk: 'qwer'}]],
+        ['Viesīte', {lat: 56.3449555, lng: 25.5429385}, [{year: 2011, lnk: 'qwer'}]],
+        ['Suntaži', {lat: 56.9046595, lng: 24.9066061}, [{year: 2012, lnk: 'qwer'}]],
+        ['Piltene', {lat: 57.2282828, lng: 21.690247}, [{year: 2013, lnk: 'qwer'}]],
+        ['Valmiera', {lat: 57.5310966, lng: 25.4131496}, [{year: 2014, lnk: 'qwer'}]],
+        ['Mālpils', {lat: 57.0069641, lng: 24.9153363}, [{year: 2015, lnk: 'qwer'}]],
+        ['Mazsalaca', {lat: 57.8629072, lng: 25.0305959}, [{year: 2016, lnk: 'qwer'}]],
+        ['Mērsrags', {lat: 57.3446637, lng: 23.1087438}, [{year: 2017, lnk: 'qwer'}]],
+        ['Ķoņi', {lat: 57.9547515, lng: 25.3406828}, [{year: 2018, lnk: 'qwer'}]],
       ];
 
       this.init(options);
@@ -76,14 +77,12 @@ window.yii.eventsMapWidget = ($ => {
 
     afterInit() {
       "use strict";
-      const w = this;
-      if (w.initWidgetElement()) {
-        w.run();
+      if (this.initWidgetElement()) {
+        this.run();
       }
     }
 
     run() {
-      const w = this;
       let mapCenter = {lat: 57, lng: 24};
 
       const map = new google.maps.Map(document.getElementById('map'), {
@@ -97,10 +96,20 @@ window.yii.eventsMapWidget = ($ => {
 
     drawPoints(map) {
       this.locations.forEach(location => {
-        new google.maps.Marker({
+        let content = `<span class='lnk'>${location[0]}</span>` +
+        location[2].map(event =>
+          `<a class='lnk' href='${event.lnk}'>${event.year}</a>`
+        ).join('');
+        let infoWindow = new google.maps.InfoWindow({
+          content,
+        });
+        let marker = new google.maps.Marker({
           map: map,
-          position: {lat: location[1], lng: location[2]},
+          position: location[1],
           title: location[0],
+        });
+        marker.addListener('click', function () {
+          infoWindow.open(map, marker);
         });
       })
     }
