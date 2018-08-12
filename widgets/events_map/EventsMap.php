@@ -1,6 +1,7 @@
 <?php
 namespace app\widgets\events_map;
 
+use app\modules\events\models\Event;
 use app\widgets\events_map\assets\EventsMapAssetBundle;
 use yii\base\Widget;
 use yii\helpers\Html;
@@ -28,7 +29,9 @@ class EventsMap extends Widget
             'id' => $this->id,
             'isDebugModeEnabled' => YII_DEBUG,
             'baseUrl' => $assets->baseUrl,
+            'locations' => [],
         ];
+        $this->prepareEventData($clientOptions);
         $clientOptions = Json::htmlEncode($clientOptions);
         \Yii::$app->view->registerJs(
             "window.yii.app.registerWidget('eventsMapWidget', {$clientOptions});"
@@ -41,5 +44,34 @@ class EventsMap extends Widget
             ),
             $options
         );
+    }
+
+    protected function prepareEventData(&$clientOptions)
+    {
+        $eventsByLocation = [];
+        foreach (Event::find()->all() as $event) {
+            if (!isset($eventsByLocation[$event->location_degrees])) {
+                $eventsByLocation[$event->location_degrees] = [];
+            }
+            $eventsByLocation[$event->location_degrees][] = [
+                'id' => $event->id,
+                'title' => $event->about,
+                'url' => \Yii::$app->urlManager->createUrl([
+                    'site/event',
+                    'id' => $event->id
+                ])
+            ];
+        }
+        foreach ($eventsByLocation as $locationDegrees => $events) {
+            list($lat, $lon) = explode(',', $locationDegrees);
+            $clientOptions['locations'][] = [
+                '',
+                [
+                    'lng' => (float) $lon,
+                    'lat' => (float) $lat,
+                ],
+                $events
+            ];
+        }
     }
 }
