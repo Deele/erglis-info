@@ -13,5 +13,7 @@ return [
     'user/logout' => 'user/logout',
     'user'        => 'user/index',
 
+    'events/<id:\d+>' => 'site/event',
+
     '' => 'site/index',
 ];

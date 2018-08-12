@@ -46,6 +46,7 @@ window.yii.eventsMapWidget = ($ => {
                 w.run();
             }
         }
+<<<<<<< HEAD
         run () {
             const w = this;
             w.renderState();
@@ -53,6 +54,67 @@ window.yii.eventsMapWidget = ($ => {
         renderState () {
             const w = this;
         }
+=======
+      ];
+
+      this.settings.locations = [];
+
+      this.openInfoWindow = false;
+      this.init(options);
+    }
+
+    closeInfoWindow() {
+      if (this.openInfoWindow) {
+        this.openInfoWindow.close();
+        this.openInfoWindow = false;
+      }
+    }
+
+    afterInit() {
+      "use strict";
+      if (this.initWidgetElement()) {
+        this.run();
+      }
+    }
+
+    run() {
+      const w = this;
+      let mapCenter = {lat: 57, lng: 24.5};
+
+      const map = new google.maps.Map(document.getElementById('map'), {
+        center: mapCenter,
+        zoom: 7,
+        styles: w.settings.mapStyles,
+      });
+
+      let icon = this.settings.baseUrl + '/aquila.png';
+
+      $.each(this.settings.locations, (key, location) => {
+        w.pointDraw(location, map, icon);
+      });
+    }
+
+    pointDraw(location, map, icon) {
+      let content = `<span class='lnk'>${location[0]}</span>` +
+        location[2].map(event =>
+          `<a class='lnk' href='${event.url}'>${event.title}</a>`
+        ).join('');
+      let infoWindow = new google.maps.InfoWindow({
+        content,
+      });
+      let marker = new google.maps.Marker({
+        map: map,
+        position: location[1],
+        title: location[0],
+        icon,
+      });
+      marker.addListener('click', () => {
+        this.closeInfoWindow();
+        infoWindow.open(map, marker);
+        this.openInfoWindow = infoWindow;
+      });
+      map.addListener('click', () => this.closeInfoWindow());
+>>>>>>> events-cms
     }
 
     return pub;
